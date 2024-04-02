@@ -10,7 +10,7 @@ Game* Game::getInstance()
     return instance;
 }
 
-void Game::Initialize(int diff)
+void Game::Initialize(int diff, std::string path)
 {
     float modifier;
     switch (diff)
@@ -28,5 +28,5 @@ void Game::Initialize(int diff)
         break;
     }
 
-    
+
 }

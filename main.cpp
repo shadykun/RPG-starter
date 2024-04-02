@@ -1,8 +1,9 @@
 #include <iostream>
 #include "game.h"
 #include "character.h"
+#include <fstream>
 
-void menu()
+Game* menu()
 {
     int choice;
     char diff;
@@ -53,6 +54,9 @@ void menu()
         if(choice < 4)
             break;
     }
+    Game* Start = Game::getInstance();
+    Start->Initialize(choice, "inputData.txt");
+    return Start;
 }
 
 int main()

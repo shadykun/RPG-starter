@@ -18,5 +18,5 @@ class Game
         int difficulty;
 
     public:
-        void Initialize(int diff);
+        void Initialize(int diff, std::string path);
 };
