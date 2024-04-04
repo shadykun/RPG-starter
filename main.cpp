@@ -61,5 +61,5 @@ Game* menu()
 
 int main()
 {
-    return 0;
+    
 }
