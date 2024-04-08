@@ -73,21 +73,29 @@ void character::set_lvl(int &n)
 void character::set_AD(int &n)
 {
     AttackDamage = n;
+    if(AttackDamage > maxAD)
+        AttackDamage = maxAD;
 }
 
 void character::set_HP(int &n)
 {
     HP = n;
+    if(HP < maxHP)
+        HP = maxHP;
 }
 
 void character::set_RemHP(int &n)
 {
     Remaining_HP = n;
+    if(Remaining_HP > HP)
+        Remaining_HP = HP;
 }
 
 void character::set_Def(int &n)
 {
     Def = n;
+    if(Def > maxDef)
+        Def = maxDef;
 }
 
 void character::set_HealthPotions(int &n)
@@ -132,7 +140,7 @@ void character::lvlUp()
         lvl++;//set_lvl(get_lvl() + 1); dar asta e mai convenabil
         AttackDamage += baseAD;
         HP += baseHP;
-        Remaining_HP += baseHP;
+        Remaining_HP = HP;
         Def += baseDef;
     }
 }
@@ -186,4 +194,15 @@ character character::operator++(int)
 {
     lvlUp();
     return *this;
+}
+
+enemy::enemy()
+{
+    name = "Wario";
+    lvl = baseLvl;
+    AttackDamage = baseAD / 2;
+    HP = baseHP / 2;
+    Def = baseDef / 2;
+    Remaining_HP = HP;
+    HealthPotionsCount = 0;
 }

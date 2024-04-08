@@ -17,7 +17,7 @@ class character
         int Remaining_HP;
         int HealthPotionsCount;
 
-    private:
+    protected:
         static const int baseLvl {1};
         static const int baseAD = 8;
         static const int baseHP = 30;
@@ -73,4 +73,5 @@ class enemy:public character
 {
     public:
     void Attack(character &c);
+    enemy();
 };
