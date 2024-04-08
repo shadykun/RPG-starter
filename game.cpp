@@ -43,7 +43,7 @@ void Game::Initialize(int diff, std::string path)
 
     enemiesCount = difficulty * 5;
     enemies = new enemy[enemiesCount];
-    for(int i = 1; i < enemiesCount; i++)
+    for(int i = 1; i < enemiesCount-1; i++)
     {
         f >> name >> lvl >> HP >> Def >> AD;
         enemies[i].set_name(name);
@@ -52,6 +52,5 @@ void Game::Initialize(int diff, std::string path)
         enemies[i].set_Def(Def);
         enemies[i].set_AD(AD);
     }
-
 
 }
