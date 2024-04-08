@@ -19,4 +19,5 @@ class Game
 
     public:
         void Initialize(int diff, std::string path);
+        void Run();
 };

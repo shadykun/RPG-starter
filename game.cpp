@@ -52,5 +52,4 @@ void Game::Initialize(int diff, std::string path)
         enemies[i].set_Def(Def);
         enemies[i].set_AD(AD);
     }
-
 }
