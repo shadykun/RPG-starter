@@ -19,7 +19,7 @@ Game* menu()
             break;
         case 2:
             std::cout << "\n\nFor real? Fine, go and play outside!\n\n";
-            return ;
+            return nullptr;
         default:
             std::cout << "\n\nNot an option, try again!\n New choice:";
             std::cin >> choice;
@@ -30,7 +30,7 @@ Game* menu()
     std::cout << "Great, so you do want to play, what difficulty would you like?\n";
     std::cout << "E - easy\nM - medium\nH - hard\n\n Difficulty: ";
     std::cin >> diff;
-    if(diff > 80)
+    if(diff > 90)
         diff -= 32;
     while(diff)
     {

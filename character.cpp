@@ -111,12 +111,13 @@ void character::Heal()
     if(Remaining_HP > HP)
         Remaining_HP = HP;
     HealthPotionsCount--;
-}
+}//check Health potions count before
 
 void character::Attack(enemy &c)
 {
-    int damageDealt = AttackDamage * std::min(c.HP/c.Def, 1);
-    c.Remaining_HP = std::max(c.Remaining_HP - damageDealt, 0);
+    int damageDealt = AttackDamage * std::min(c.get_HP()/c.get_Def(), 1);
+    int newHP = std::max(c.get_RemHP() - damageDealt, 0);
+    c.set_RemHP(newHP);
 }
 
 void enemy::Attack(character &c)
@@ -145,15 +146,21 @@ void character::lvlUp()
     }
 }
 
+/*
+std::cout << MC
+f << MC
+
+*/
 std::ostream& operator<<(std::ostream& of, character &c)
 {
-    std::cout<<"\n\n\nPlayer name: "<<c.get_name()<<"\n\n";
-    std::cout<<"Level: "<<c.get_lvl()<<"\n";
-    std::cout<<"Total HP: "<<c.get_HP()<<"\n";
-    std::cout<<"HP: "<<c.get_RemHP()<<"\n";
-    std::cout<<"Defense: "<<c.get_Def()<<"\n";
-    std::cout<<"Attack Damage: "<<c.get_AD()<<"\n\n";
-    std::cout<<"You have "<<c.get_HealthPotions()<<" potions left!\n\n\n";
+    of<<"\n\n\nPlayer name: "<<c.get_name()<<"\n\n";
+    of<<"Level: "<<c.get_lvl()<<"\n";
+    of<<"Total HP: "<<c.get_HP()<<"\n";
+    of<<"HP: "<<c.get_RemHP()<<"\n";
+    of<<"Defense: "<<c.get_Def()<<"\n";
+    of<<"Attack Damage: "<<c.get_AD()<<"\n\n";
+    of<<"You have "<<c.get_HealthPotions()<<" potions left!\n\n\n";
+    return of;
 }
 
 std::istream &operator>>(std::istream& is, character&c)
