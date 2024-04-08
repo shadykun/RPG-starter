@@ -13,21 +13,6 @@ Game* Game::getInstance()
 
 void Game::Initialize(int diff, std::string path)
 {
-    float modifier;
-    switch (diff)
-    {
-    case 0:
-        modifier = 0.5;
-        break;
-    case 1:
-        modifier = 1;
-        break;
-    case 2:
-        modifier = 1.5;
-    default:
-        std::cout<<"An error occured!!!!";
-        break;
-    }
     difficulty = 1 + diff;
 
     std::ifstream f(path);
