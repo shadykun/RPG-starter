@@ -7,28 +7,31 @@ Game* menu()
 {
     int choice;
     char diff;
-    std::cout << "\n\nWELCOME TO POOLAND\n\nChose an option: \n";
-    std::cout << "1. Play\n2. Quit (please don't)\n\nChoice:";
+    std::cout << "WELCOME TO POOLAND\n\nChose an option: \n";
+    std::cout << "1. Play\n2. Quit (please don't)\n\nChoice: ";
     std::cin >> choice;
     while(choice != 1)
     {
         switch (choice)
         {
         case 1:
-            Game;
             break;
         case 2:
             std::cout << "\n\nFor real? Fine, go and play outside!\n\n";
             return nullptr;
         default:
-            std::cout << "\n\nNot an option, try again!\n New choice:";
+            std::cout << "\n\nNot an option, try again!\nNew choice:";
             std::cin >> choice;
             break;
         }
     }
     choice = 100;
+    if(isLinux())
+        system("clear");
+    else
+        system("cls");
     std::cout << "Great, so you do want to play, what difficulty would you like?\n";
-    std::cout << "E - easy\nM - medium\nH - hard\n\n Difficulty: ";
+    std::cout << "E - easy\nM - medium\nH - hard\n\nDifficulty: ";
     std::cin >> diff;
     if(diff > 90)
         diff -= 32;
@@ -61,6 +64,18 @@ Game* menu()
 
 int main()
 {
+    bool win;
     Game* Gameplay = menu();
+    if (Gameplay == nullptr)
+        return 0;
+    win = Gameplay->Run();
+    if(isLinux())
+        system("clear");
+    else
+        system("cls");
+    if (win)
+        std::cout << "\n\nYOU WON!!!\n\n";
+    else
+        std::cout << "\n\nLoser...\n\n";
     return 0;
 }

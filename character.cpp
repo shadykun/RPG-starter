@@ -1,4 +1,5 @@
 #include "character.h"
+#include <cmath>
 
 character::character()
 {
@@ -80,7 +81,7 @@ void character::set_AD(int &n)
 void character::set_HP(int &n)
 {
     HP = n;
-    if(HP < maxHP)
+    if(HP > maxHP)
         HP = maxHP;
 }
 
@@ -98,7 +99,7 @@ void character::set_Def(int &n)
         Def = maxDef;
 }
 
-void character::set_HealthPotions(int &n)
+void character::set_HealthPotions(int n)
 {
     HealthPotionsCount = n;
 }
@@ -107,6 +108,11 @@ void character::set_HealthPotions(int &n)
 
 void character::Heal()
 {
+    if (HealthPotionsCount == 0)
+    {
+        std::cout << "\nNo more life potions!\n";
+        return;
+    }
     Remaining_HP += healPotionRestorationEffect;
     if(Remaining_HP > HP)
         Remaining_HP = HP;
@@ -115,15 +121,17 @@ void character::Heal()
 
 void character::Attack(enemy &c)
 {
-    int damageDealt = AttackDamage * std::min(c.get_HP()/c.get_Def(), 1);
-    int newHP = std::max(c.get_RemHP() - damageDealt, 0);
+    float damageDealt = AttackDamage * std::min((float)(c.get_HP())/c.get_Def(), (float)1);
+    int dmg = std::floor(damageDealt);
+    int newHP = std::max(c.get_RemHP() - dmg, 0);
     c.set_RemHP(newHP);
 }
 
 void enemy::Attack(character &c)
 {
-    int damageDealt = AttackDamage * std::min(c.get_HP()/c.get_Def(), 1);
-    int newHP = std::max(c.get_RemHP() - damageDealt, 0);
+    float damageDealt = AttackDamage * std::min((float)(c.get_HP())/c.get_Def(), (float)1);
+    int dmg = std::floor(damageDealt);
+    int newHP = std::max(c.get_RemHP() - dmg, 0);
     c.set_RemHP(newHP);
 }
 
@@ -150,16 +158,34 @@ void character::lvlUp()
 std::cout << MC
 f << MC
 
+aV = mV * x / 100
+
+x = aV / mV * 100
+
 */
-std::ostream& operator<<(std::ostream& of, character &c)
+
+void bar(int maxVal, int actualVal)
 {
-    of<<"\n\n\nPlayer name: "<<c.get_name()<<"\n\n";
-    of<<"Level: "<<c.get_lvl()<<"\n";
-    of<<"Total HP: "<<c.get_HP()<<"\n";
-    of<<"HP: "<<c.get_RemHP()<<"\n";
-    of<<"Defense: "<<c.get_Def()<<"\n";
-    of<<"Attack Damage: "<<c.get_AD()<<"\n\n";
-    of<<"You have "<<c.get_HealthPotions()<<" potions left!\n\n\n";
+    std::cout<<"[";
+    for(int i = 0; i < 20; i++)
+    {
+        if(i < float(actualVal) / maxVal * 20)
+            std::cout<<"|";
+        else
+            std::cout<<" ";
+    }
+    std::cout<<"]\n";
+}
+
+std::ostream& operator<<(std::ostream& of, character& c)
+{
+    of << "Player name: " << c.get_name() << "\n\n";
+    of << "Level: " << c.get_lvl() << "\n";
+    std::cout<<"HP ";
+    bar(c.get_HP(), c.get_RemHP());
+    of << "Defense: " << c.get_Def() << "\n";
+    of << "Attack Damage: " << c.get_AD() << "\n\n";
+    of << "You have " << c.get_HealthPotions() << " potions left!\n";
     return of;
 }
 
@@ -169,6 +195,17 @@ std::istream &operator>>(std::istream& is, character&c)
     std::string name;
     is >> name >> hp >> def >> ad;
     return is;
+}
+
+std::ostream& operator<<(std::ostream& of, enemy& c)
+{
+    of << "Enemy name: " << c.get_name() << "\n\n";
+    of << "Level: " << c.get_lvl() << "\n";
+    std::cout<<"HP ";
+    bar(c.get_HP(), c.get_RemHP());
+    of << "Defense: " << c.get_Def() << "\n";
+    of << "Attack Damage: " << c.get_AD() << "\n";
+    return of;
 }
 
 bool character::operator<(character &c)

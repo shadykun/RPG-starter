@@ -21,3 +21,5 @@ class Game
         void Initialize(int diff, std::string path);
         bool Run();
 };
+
+bool isLinux();

@@ -51,14 +51,14 @@ class character
         void set_HP(int &n);
         void set_RemHP(int &n);
         void set_Def(int &n);
-        void set_HealthPotions(int &n);
+        void set_HealthPotions(int n);
 
     public:
         void Heal();
         void Attack(enemy &c);
         bool isAlive();
         void lvlUp();
-        friend std::ostream& operator<<(std::ostream& of, const character &c);
+        friend std::ostream& operator<<(std::ostream& of, character &c);
         bool operator<(character &c);
         bool operator>(character &c);
         bool operator==(character &c);
@@ -73,5 +73,6 @@ class enemy:public character
 {
     public:
     void Attack(character &c);
+    friend std::ostream& operator<<(std::ostream& of, enemy& c);
     enemy();
 };
